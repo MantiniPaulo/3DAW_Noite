@@ -10,14 +10,6 @@ $nome2 = "Camilla";
 $nome3 = "Benjamin";
 $nome4 = "Vini";
 $nome5 = "Aline";
-$nome5 = "Aline";
-$nome5 = "Aline";
-$nome5 = "Aline";
-$nome5 = "Aline";
-$nome5 = "Aline";
- 
-
-
 
 echo "<h2>Exercicio 1</h2>";
 echo "Alo Alo boaa noite pessoal";
