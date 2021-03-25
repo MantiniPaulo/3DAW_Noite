@@ -12,7 +12,7 @@ $nome4 = "Vini";
 $nome5 = "Aline";
 
 echo "<h2>Exercicio 1</h2>";
-echo "Alo Alo boaa noite pessoal";
+echo "Alo Alo boa noite pessoal";
 echo "<table border='1' ><tr><td>$nome1</td><td>$nome2</td><td>$nome3</td></tr>";
 echo "<tr><td>$nome4</td><td>$nome5</td><td>$nome6</td></tr></table>";
 ?>
