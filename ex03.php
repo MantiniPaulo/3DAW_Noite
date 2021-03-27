@@ -14,8 +14,6 @@ $nome6 = "GABRIELLE FRANCISCO";
 $n1 = 7;
 $n2 = 8;
 
-
-
 echo "<h2>Exercicio 01</h2>";
 echo "Alo alo boa noite gente";
 echo "<table border='1'><tr><td>" . $nome1 . "</td><td>" . $nome2 . "</td><td>" . $nome3 . "</td></tr>";

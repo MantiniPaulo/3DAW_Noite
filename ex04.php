@@ -21,6 +21,7 @@ echo "<table border='1'><tr><td>" . $nome1 . "</td><td>" . $nome2 . "</td><td>" 
 echo "<tr><td>$nome4</td><td>$nome5</td><td>$nome6</td></tr></table>";
 echo "<br>";
 echo "<br>";
+
 echo "<br> valor de variavel com tipo string: ";
 var_dump($nome1);
 echo $nome1 = $n1 + $n2;
@@ -38,9 +39,9 @@ echo "<br> valor de variavel com tipo int: ";
 var_dump($n1);
 echo "<br> variavel N1 = $n1 é do tipo ponto flutuante? ";
 var_dump(is_float($n1));
-echo "<br> variavel F1 = $n1 é do tipo ponto flutuante? ";
+echo "<br> variavel F1 = $f1 é do tipo ponto flutuante? ";
 var_dump(is_float($f1));
-echo "<br> variavel f1 = $n1 é do tipo inteiro? ";
+echo "<br> variavel F1 = $f1 é do tipo inteiro? ";
 var_dump(is_int($f1));
 
 
