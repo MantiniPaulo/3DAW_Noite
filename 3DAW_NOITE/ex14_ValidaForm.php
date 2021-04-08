@@ -16,4 +16,23 @@
     echo "<br>";
     echo "<br>";
 
+    if (ctype_alpha($nome)) {
+        $nomeValido = 1;
+    } else {
+        echo "Nome Invalido";
+        echo "<br>";
+    }
+    if (ctype_digit($idade)) {
+        $nomeIdade = 1;
+    } else {
+        echo "Idade Invalida";
+        echo "<br>";
+    }
+    if (ctype_alpha($email)) {
+        $nomeEmail = 1;
+    } else {
+        echo "E-mail Invalido";
+        echo "<br>";
+    }
+
 ?>
