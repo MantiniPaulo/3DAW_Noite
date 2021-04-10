@@ -11,11 +11,6 @@ if($a == 0 && $b == 0) { //if para verificar números inseridos
     echo "<br>";
     echo "Valores Inválidos";
     echo "<br>";
-}else if ($a == 0 && $operação == "divisão"){ //if e else para operações de divisões invalidas (pergunta: posso colocar ($a == 0 or $b ==0 && $operação == "divisão")
-    echo "Operação impossível";
-    echo "<br>";
-    echo "Zero não pode ser dividido";
-    echo "<br>";
 }else if ($b == 0 && $operação == "divisão"){
     echo "Operação impossível";
     echo "<br>";
@@ -44,7 +39,8 @@ if($a == 0 && $b == 0) { //if para verificar números inseridos
     <title>Resultado</title>
 </head>
 <body>
-    <form action="calculadora.html"method="POST"></form>
+    <br>
+    <br>
     <input type="submit" value="Voltar"; 
 </body>
 </html>
