@@ -29,7 +29,6 @@ if($a == 0 && $b == 0) { //if para verificar números inseridos
  = ($a / $b);
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,9 +38,9 @@ if($a == 0 && $b == 0) { //if para verificar números inseridos
     <title>Resultado</title>
 </head>
 <body>
-    <br>
-    <br>
-    <input type="submit" value="Voltar"; 
+    <form>
+        <br>
+        <input type="button" value="Voltar" onclick="history.go(-1)" />
+    </form>
 </body>
 </html>
-
