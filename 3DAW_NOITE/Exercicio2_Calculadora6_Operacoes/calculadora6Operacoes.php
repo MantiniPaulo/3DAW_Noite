@@ -5,17 +5,18 @@ $a = $_POST["a"];
 $b = $_POST["b"];
 $operação = $_POST["operacao"]; 
 $resultado = 0;
-$erroMsg1 = " ";
+
 
     function validarDados(int $a, int $b, string $operação){
+        $falha = "";
         if (!ctype_digit($a)) {
-            $erroMsg1 = "Parametro não é númerico";
+            $falha = "Parametro não é númerico";
         }
         if (!ctype_digit($b)) {
-            $erroMsg1 = "Parametro não é númerico";
+            $falha = "Parametro não é númerico";
         }
         if ($operação == "divisão" and $b ==0){
-            $erroMsg1 = "Não se pode dividir nad apor 0. Modifiquei o segundo número";
+            $falha = "Não pode ocorrer a divisão por 0. Modifiquei o segundo número";
         }
     }
 
@@ -45,6 +46,7 @@ $erroMsg1 = " ";
     }
 
 
+    validarDados($a,$b,$operação);
     if ($operação == "soma") { 
         $resultado = soma($a, $b);
     }elseif ($operação == "subtração") {
@@ -98,17 +100,16 @@ $erroMsg1 = " ";
 
 if ($_SERVER["REQUEST_METHOD"]  == "POST")
 {
-if ($resultado != 0){
-    echo "<br>";
-    echo "Resultado: " . $resultado;
-}else{
-    echo $erroMsg1;
-}
+    if ($resultado != 0){
+        echo "<br>";
+        echo "Resultado: " . $resultado;
+    }else{
+        echo $erroMsg1;
+    }
     
 }
 
-?>
-    
+?>    
 </body>
 </html>
 
