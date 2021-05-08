@@ -50,7 +50,7 @@ $hierarquia = array(
         )
         //ter. diretor comercial  
         
-        novo novoo nn
+        ///novo
     )
 )
 
