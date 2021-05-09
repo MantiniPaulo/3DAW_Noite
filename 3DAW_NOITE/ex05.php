@@ -18,7 +18,7 @@ echo "<br> Valor arredondado de F1 para o inteiro mais proximo :  ";
 echo round($f1);
 
 echo "<br> Valor arredondado de F1 com duas casa decimais :  ";
-echo round($f1,2);
+echo round($f1,2 99);
 
 echo "<br> Valor com tamanho da string :  ";
 echo strlen($nome1);
