@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST")
             {
                 echo '<tr>';
                 $reg = $valores->fetch_row();
-                echo "<th>$reg[1]</th> <th>$reg[2]</th> <th>$reg[3]</th> <th>$reg[4]</th><th><a class='btn btn-warning' href='?act=upd&id=".$reg[0]."'>Alterar</a> 
+                echo "<th>$reg[1]</th> <th>$reg[2]</th> <th>$reg[3]</th> <th>$reg[4]</th><th><a class='btn btn-primary' href='?act=upd&id=".$reg[0]."'>Alterar</a> 
                 <a class='btn btn-danger' href='?act=del&id=".$reg[0]."'>Excluir</a></th>";             
                 echo '</tr>';       
                           

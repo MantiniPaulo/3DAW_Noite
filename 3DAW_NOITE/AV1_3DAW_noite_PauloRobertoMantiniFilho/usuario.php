@@ -28,6 +28,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST")
     $senha = (isset($_POST["senha"])?$_POST["senha"]:false);
     $tipo = (isset($_POST["tipo"])?$_POST["tipo"]:false);
     $perfil = (isset($_POST["perfil"])?$_POST["perfil"]:false);
+    $arquivo = (isset($_POST["30000"])?$_POST["30000"]:false);
     
     if ($operacao == "inclui")   
     {       
@@ -71,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST")
         $strcon->close();
     } else if ($operacao == "buscarUsuario")
     {
-        $valores = $strcon->query("SELECT `id_disciplina`, `nome`, `periodo`, `idPrerequesito`, `creditos` FROM `disciplinas`");
+        $valores = $strcon->query("SELECT `id`, `nome`, `email`, `senha`, `tipo`, `perfil` FROM `usuario`");
         $reg = $valores->fetch_row();
         echo '<div class="container">';
         echo '<form class="container" action="pesquisaUsuario.php?act=pes" method="POST">';
@@ -83,7 +84,22 @@ if ($_SERVER["REQUEST_METHOD"]  == "POST")
         echo "<input type='submit' class='btn btn-primary' value='Pesquisar'/>";
         echo '</form>';
         echo '</div>';
-    }    
+    }else if ($arquivo = "30000")
+    {
+        $arquivo_tmp = $_FILES['userfile']['tmp_name'];
+        $dados = file($arquivo_tmp);
+
+        foreach($dados as $linhas)
+        {
+            $valores = $strcon->query("SELECT `id`, `nome`, `email`, `senha`, `tipo`, `perfil` FROM `usuario`");               
+
+            $result_usuario = "INSERT INTO `usuario`(`id`, `nome`, `email`, `senha`, `tipo`, `perfil`) VALUES ('$id','$nome','$email','$senha','$tipo','$perfil')";
+
+            $resultado_usuario = mysqli_query($strcon, $result_usuario);
+
+            header(sprintf("location:index.html?resultado=%s", $resultado));
+        }
+    }
 } 
 
 ?>

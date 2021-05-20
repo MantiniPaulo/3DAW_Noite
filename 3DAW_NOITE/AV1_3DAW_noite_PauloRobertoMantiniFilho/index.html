@@ -86,10 +86,9 @@
                 <input type="submit" class="btn btn-primary" value="Criar Usuário" /><br><br>
             </form>
             <h6>Cadastro de usuários por upload de arquivo</h6>
-            <form form class="container" action="usuario.php" method="POST">
-                <input type="hidden" name="operacao" value="arquivar" />
-                <input type="file" class="btn btn-primary" name="arquivo" /> <br><br>
-                <input type="submit" class="btn btn-primary" value="Carregar Arquivo" />
+            <form form class="container" action="upload.php" method="POST">
+                <input type="hidden" name="enviar" value="arquivo" />
+                <input type="submit" class="btn btn-primary" name="upload" value="Carregar Arquivo"/>
                 <hr>
             </form>
             </table>
