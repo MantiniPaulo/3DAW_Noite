@@ -21,7 +21,7 @@ if (isset($_REQUEST["act"]) && $_REQUEST["act"] == "del" && $id != "") {
 if ($_SERVER["REQUEST_METHOD"]  == "POST")
 {     
         
-    $operacao = (isset($_POST["operacao"])?$_POST["operacao"]:false);
+    $operacao = (isset($_GET["operacao"])?$_POST["operacao"]:false);
     $disciplina = (isset($_POST["disciplina"])?$_POST["disciplina"]:false);
     $periodo = (isset($_POST["periodo"])?$_POST["periodo"]:false);
     $idPrerequesito = (isset($_POST["idPrerequesito"])?$_POST["idPrerequesito"]:false);

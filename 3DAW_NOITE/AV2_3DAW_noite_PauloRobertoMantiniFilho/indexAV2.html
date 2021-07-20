@@ -3,8 +3,9 @@
 
 <head>
     <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,8 +26,115 @@
             width: 400px;
             height: 100px;
             float: left;
-        }        
+        }
     </style>
+    <script>
+        function inserirProdutos() {
+            let objProduto = document.getElementById("formProduto")
+            let msg = validarProduto(objProduto);
+            if (msg == true) {
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        //let obj = JSON.parse(this.responseText);
+                        //alert(this.responseText);
+                        if(this.responseText)
+                        {
+                            alert("Salvo com Sucesso");
+                            limparCampos();
+                        }
+                        else{
+                            alert("Erro ao Inserir Produto")
+                        }
+                        //document.getElementById("resposta").innerHTML = this.responseText; //obj.value;
+                    }
+                }
+                console.log({
+                    objProduto
+                });
+                xmlHttp.open("GET",
+                    "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/criarProduto.php?codBarra=" +
+                    objProduto.codBarra.value + "&nomeProduto=" + objProduto.nomeProduto.value + "&fabricante=" +
+                    objProduto.fabricante.value + "&precoVenda=" + objProduto.precoVenda.value + "&quantAdquirida=" +
+                    objProduto
+                    .quantAdquirida.value + "&peso=" + objProduto.peso.value + "&descricao=" + objProduto
+                    .descricao.value +
+                    "&imagem=" + objProduto.imagem.value + "&dia=" + objProduto.dia.value + "&ativo=" +
+                    objProduto.ativo.value, true);
+                xmlHttp.send();
+                console.log("requisição enviada");
+            }
+        }
+        function limparCampos()
+        {
+            document.getElementById("codBarra").value = ""
+            document.getElementById("nomeProduto").value = ""
+            document.getElementById("fabricante").value = ""
+            document.getElementById("precoVenda").value = ""
+            document.getElementById("quantAdquirida").value = ""
+            document.getElementById("peso").value = ""
+            document.getElementById("descricao").value = ""
+            document.getElementById("imagem").value = ""
+            document.getElementById("dia").value = ""
+            document.getElementById("ativo").value = ""
+        }
+        function validarProduto(formProduto){
+            
+            if (formProduto.codBarra.value == "")
+            {
+                alert ("Informar Dados");
+                return false;
+            }
+            if (formProduto.nomeProduto.value == "")
+            {
+                alert ("Informar Dados")
+                return false;
+                
+            }
+            if (formProduto.fabricante.value == "")
+            {
+                alert ("Informar Dados")
+                return false;
+            }
+            if (formProduto.precoVenda.value == "")
+            {
+                alert ("Informar Dados")
+                return false;
+            }
+            if (formProduto.quantAdquirida.value == "")
+            {
+                alert ("Informar Dados")
+                return false;
+            }
+            if (formProduto.peso.value == "")
+            {
+                alert ("Informar Dados")
+                return false;
+            }
+            if (formProduto.descricao.value == "")
+            {
+                alert ("Informar Dados")
+                return false;
+            }
+            if (formProduto.imagem.value == "")
+            {
+                alert ("Informar Dados")
+                return false;
+            }
+            if (formProduto.dia.value == "")
+            {
+                alert ("Informar Dados")
+                return false;
+            }
+            if (formProduto.ativo.value == "")
+            {
+                alert ("Informar Dados")
+                return false;
+            }           
+            return true;
+        }
+    </script>
+
 </head>
 
 <body>
@@ -38,93 +146,158 @@
         <h2>Sistema de controle de produtos</h2>
         <hr>
         <div id="esquerda" class="container-md">
-            <form class="container" action="disciplina.php" method="POST">
+            <form class="container" method="POST" action="" name="produtos" id="formProduto">
                 <h2>Adicionar Produto ao Estoque</h2>
                 <hr>
-                <input type="hidden" class="row" name="operacao" value="incluir" />
 
-                Código de Barra:
-                <input type="number" class="row" name="codBarra" required /> <br>
-                Nome do produto:
-                <input type="text" class="row" name="nomeProduto" required /> <br>
-                Fabricante:
-                <input type="text" class="row" name="idPrerequesito" required /> <br>
-                Categoria: (por dropdown)
-                <input type="text" class="row" name="categoria" required /><br>
-                Tipo de produto: (por dropdown)
-                <input type="text" class="row" name="tipoProduto" required /><br>
-                Preço de venda:
-                <input type="text" class="row" name="precoVenda" required /><br>
-                Quantidade adquirida:
-                <input type="number" class="row" name="quantAdquirida" required /><br>
-                *Peso:
-                <input type="number" class="row" name="peso" required /><br>
-                Descrição:
-                <input type="text" class="row" name="credito" required /><br>
-                Link da Imagem:
-                <input type="text" class="row" name="credito" required /><br>
-                Data de inclusão:
-                <input type="date" class="row" name="credito" required /><br>
-                Ativo:
-                <input type="text" class="row" name="credito" required /><br>
-                <input type="submit" class="btn btn-primary" value="Criar Disciplina" />
+                <div class="form-group">
+                    <label for="codBarra">Código de Barra:</label>
+                    <input id="codBarra" type="number" class="form-control" name="codBarra" required />
+                </div>
 
+                <div class="form-group">
+                    <label for="nomeProduto">Nome do produto:</label>
+                    <input id="nomeProduto" type="text" class="form-control" name="nomeProduto" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="fabricante">Fabricante:</label>
+                    <input id="fabricante" type="text" class="form-control" name="fabricante" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="categoria">Categoria:</label>
+                    <select id="categoria" type="text" class="form-control" name="categoria" required>
+                        <option value="0">Selecione</option>
+                        <option value="0"></option>
+                        <option value="0">Rio</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipoProduto">Tipo de produto:</label>
+                    <select id="tipoProduto" type="text" class="form-control" name="tipoProduto" required>
+                        <option value="">Selecione</option>
+                        <option value="">Tipo2</option>
+                        <option value=""></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="precoVenda">Preço de Venda:</label>
+                    <input id="precoVenda" type="number" class="form-control" name="precoVenda" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="quantAdquirida">Quantidade Adquirida</label>
+                    <input id="quantAdquirida" type="number" class="form-control" name="quantAdquirida" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="peso">Peso:</label>
+                    <input id="peso" type="number" class="form-control" name="peso" required />
+                    <small id="pesoKg" class="form-text text-muted">Inserir peso em gramas</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="descricao">Descrição:</label>
+                    <input id="descricao" type="text" class="form-control" name="descricao" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="imagem">Link Imagem:</label>
+                    <input id="imagem" type="text" class="form-control" name="imagem" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="dia">Data da inclusão:</label>
+                    <input id="dia" type="date" class="form-control" name="dia" required />
+                </div>
+
+                <div class="form-group">
+                    <label id="ativo">Ativo:</label>
+                    <select id="ativo" type="text" class="form-control" name="ativo" required>
+                        <option value="">Selecione</option>
+                        <option value="true">SIM</option>
+                        <option value="false">NÂO</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="button" name="op" class="btn btn-outline-primary" value="InserirProduto"
+                        onclick="inserirProdutos()">
+                </div>
                 <hr>
             </form>
-            </table>
-            <br>
         </div>
-        
+        <p id="resposta"></p>
+
         <div id="direita" class="container-md">
-            <form action=""  method="POST" name="listProdutos" id="listarProdutos">
+            <form action="" method="POST" name="listProdutos" id="listarProdutos">
                 <h2>Listar e Buscar</h2>
                 <hr>
                 <input type="hidden" class="row" name="operacao" value="listarProdutos" />
-                <input type="submit" class="btn btn-primary" value="Listar Produtos em Estoque" /><br><br>
+                <input type="submit" class="btn btn-outline-primary" value="Listar Produtos em Estoque" /><br><br>
             </form>
             <hr>
-            <form action=""  method="POST" name="listProduto" id="listarProduto">
+            <form action="" method="POST" name="listProduto" id="listarProduto">
                 <input type="hidden" class="row" name="operacao" value="listarProduto" />
-                Digite o código de barras para listar o produto:
-                <input type="number" class="row" name="codigoBarras" required /><br>
-                <input type="submit" class="btn btn-primary" value="Listar Produto" /><br><br>
+                <div class="form-group">
+                    <label id="listarporCodigoBarra">Digite o código de barras para listar um o produto:</label>
+                    <div>
+                        <input type="number" class="form-control" name="listarporCodigoBarra" required />
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <input type="submit" name="op" class="btn btn-outline-primary" value="Listar Produto"
+                            onclick="" />
+                    </div>
+                </div>
+
             </form>
-
             <hr>
-
-
         </div>
 
+    </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
     </div>
 
 
 
-</body>
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
-</script>
-<script>
-    window.onload = function () {
-        queryString("resultado") == "1" ? alert("Operação Efetuada com Sucesso") : " ";
-    }
 
-    function queryString(parameter) {
-        var loc = location.search.substring(1, location.search.length);
-        var param_value = false;
-        var params = loc.split("&");
-        for (i = 0; i < params.length; i++) {
-            param_name = params[i].substring(0, params[i].indexOf('='));
-            if (param_name == parameter) {
-                param_value = params[i].substring(params[i].indexOf('=') + 1)
-            }
-        }
-        if (param_value) {
-            return param_value;
-        } else {
-            return false;
-        }
-    }
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
 </script>
 
 </html>

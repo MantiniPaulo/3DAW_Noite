@@ -19,13 +19,13 @@
                         let obj = JSON.parse(this.responseText);
                         let cities = document.getElementById("cidades");
                          for (i=0;i<obj.length;i++) {
-                            console.log("cidade: " + obj[i]);
+                            //console.log("cidade: " + obj[i]);
                             let city = new Option(obj[i], obj[i]);
                             cities.options.add(city);
                         }
                     }
                 }
-                xmlHttp.open("GET", "https://localhost/3daw_noite/ex20_GetCidades.php?estado=" + strUF, true);
+                xmlHttp.open("GET", "http://localhost/3daw/3daw_noite/ex20_GetCidades.php?estado=" + strUF, true);
                 xmlHttp.send();
                 console.log("requisição enviada");
             }
@@ -41,7 +41,8 @@
                         document.getElementById("resposta").innerHTML = this.responseText; //obj.value;
                     }
                 }
-                xmlHttp.open("GET", "https://localhost/3daw_noite/ex21_inseriraluno.php?nome=" + objAluno.nome + "&email=" + objAluno.email + "&cpf=" + objAluno.cpf + "&matricula=" + objAluno.matricula + "&uf=" + objAluno.uf + "&cidade=Rio" + objAluno.cidade, true);
+                console.log({objAluno});
+                xmlHttp.open("GET", "http://localhost/3daw/3daw_noite/ex21_inseriraluno.php?nome=" + objAluno.nome + "&email=" + objAluno.email + "&cpf=" + objAluno.cpf + "&matricula=" + objAluno.matricula + "&uf=" + objAluno.uf + "&cidade=Rio" + objAluno.cidade, true);
 
                 xmlHttp.send();
                 console.log("requisição enviada");
