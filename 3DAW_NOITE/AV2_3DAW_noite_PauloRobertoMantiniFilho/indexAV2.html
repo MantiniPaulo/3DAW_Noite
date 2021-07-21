@@ -36,17 +36,12 @@
                 let xmlHttp = new XMLHttpRequest();
                 xmlHttp.onreadystatechange = function () {
                     if (this.readyState == 4 && this.status == 200) {
-                        //let obj = JSON.parse(this.responseText);
-                        //alert(this.responseText);
-                        if(this.responseText)
-                        {
+                        if (this.responseText) {
                             alert("Salvo com Sucesso");
                             limparCampos();
-                        }
-                        else{
+                        } else {
                             alert("Erro ao Inserir Produto")
-                        }
-                        //document.getElementById("resposta").innerHTML = this.responseText; //obj.value;
+                        }                        
                     }
                 }
                 console.log({
@@ -55,7 +50,8 @@
                 xmlHttp.open("GET",
                     "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/criarProduto.php?codBarra=" +
                     objProduto.codBarra.value + "&nomeProduto=" + objProduto.nomeProduto.value + "&fabricante=" +
-                    objProduto.fabricante.value + "&precoVenda=" + objProduto.precoVenda.value + "&quantAdquirida=" +
+                    objProduto.fabricante.value + "&precoVenda=" + objProduto.precoVenda.value +
+                    "&quantAdquirida=" +
                     objProduto
                     .quantAdquirida.value + "&peso=" + objProduto.peso.value + "&descricao=" + objProduto
                     .descricao.value +
@@ -65,8 +61,36 @@
                 console.log("requisição enviada");
             }
         }
-        function limparCampos()
-        {
+        function listarEstoque(){
+
+        }
+        function listarProduto(){ 
+            let objListarProduto = document.getElementById("formProdutoListado")
+            let msg = validarListarProduto(objListarProduto);
+            if (msg == true) {
+                let xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        if (this.responseText) {
+                            alert("Salvo com Sucesso");
+                            limparCampos();
+                        } else {
+                            alert("Produto não encontrado")
+                        }                        
+                    }
+                }
+                console.log({
+                    objListarProduto
+                });
+                xmlHttp.open("GET",
+                    "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/lerProduto.php?codBarra=" +
+                    objListarProduto.codBarra.value, TRUE); 
+                xmlHttp.send();
+                console.log("requisição enviada");
+            }
+    
+        }
+        function limparCampos() {
             document.getElementById("codBarra").value = ""
             document.getElementById("nomeProduto").value = ""
             document.getElementById("fabricante").value = ""
@@ -78,61 +102,61 @@
             document.getElementById("dia").value = ""
             document.getElementById("ativo").value = ""
         }
-        function validarProduto(formProduto){
-            
-            if (formProduto.codBarra.value == "")
-            {
-                alert ("Informar Dados");
+
+        function validarProduto(formProduto) {
+
+            if (formProduto.codBarra.value == "") {
+                alert("Informar Dados");
                 return false;
             }
-            if (formProduto.nomeProduto.value == "")
-            {
-                alert ("Informar Dados")
+            if (formProduto.nomeProduto.value == "") {
+                alert("Informar Dados")
                 return false;
-                
+
             }
-            if (formProduto.fabricante.value == "")
-            {
-                alert ("Informar Dados")
+            if (formProduto.fabricante.value == "") {
+                alert("Informar Dados")
                 return false;
             }
-            if (formProduto.precoVenda.value == "")
-            {
-                alert ("Informar Dados")
+            if (formProduto.precoVenda.value == "") {
+                alert("Informar Dados")
                 return false;
             }
-            if (formProduto.quantAdquirida.value == "")
-            {
-                alert ("Informar Dados")
+            if (formProduto.quantAdquirida.value == "") {
+                alert("Informar Dados")
                 return false;
             }
-            if (formProduto.peso.value == "")
-            {
-                alert ("Informar Dados")
+            if (formProduto.peso.value == "") {
+                alert("Informar Dados")
                 return false;
             }
-            if (formProduto.descricao.value == "")
-            {
-                alert ("Informar Dados")
+            if (formProduto.descricao.value == "") {
+                alert("Informar Dados")
                 return false;
             }
-            if (formProduto.imagem.value == "")
-            {
-                alert ("Informar Dados")
+            if (formProduto.imagem.value == "") {
+                alert("Informar Dados")
                 return false;
             }
-            if (formProduto.dia.value == "")
-            {
-                alert ("Informar Dados")
+            if (formProduto.dia.value == "") {
+                alert("Informar Dados")
                 return false;
             }
-            if (formProduto.ativo.value == "")
-            {
-                alert ("Informar Dados")
+            if (formProduto.ativo.value == "") {
+                alert("Informar Dados")
                 return false;
-            }           
+            }
             return true;
         }
+        
+        function validarListarProduto(listarProduto){
+            
+            if (listarProduto.codBarra.value == "") {
+                alert("Informar o codigo de barras do produto");
+                return false;
+            }
+        }
+        
     </script>
 
 </head>
@@ -224,8 +248,8 @@
                 </div>
 
                 <div>
-                    <input type="button" name="op" class="btn btn-outline-primary" value="InserirProduto"
-                        onclick="inserirProdutos()">
+                    <button type="button" name="op" class="btn btn-outline-primary" value="InserirProduto"
+                        onclick="inserirProdutos()">Inserir Produto</button>
                 </div>
                 <hr>
             </form>
@@ -235,22 +259,16 @@
         <div id="direita" class="container-md">
             <form action="" method="POST" name="listProdutos" id="listarProdutos">
                 <h2>Listar e Buscar</h2>
-                <hr>
-                <input type="hidden" class="row" name="operacao" value="listarProdutos" />
-                <input type="submit" class="btn btn-outline-primary" value="Listar Produtos em Estoque" /><br><br>
+                <hr>                
+                <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalListarProdutos" onclick="listarEstoque()">
+                    Listar Produtos em Estoque
+                </button>
             </form>
             <hr>
-            <form action="" method="POST" name="listProduto" id="listarProduto">
-                <input type="hidden" class="row" name="operacao" value="listarProduto" />
-                <div class="form-group">
-                    <label id="listarporCodigoBarra">Digite o código de barras para listar um o produto:</label>
-                    <div>
-                        <input type="number" class="form-control" name="listarporCodigoBarra" required />
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <input type="submit" name="op" class="btn btn-outline-primary" value="Listar Produto"
-                            onclick="" />
+            <div class="form-group">
+                        <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalListarProduto">
+                            Listar Produto
+                        </button>
                     </div>
                 </div>
 
@@ -259,13 +277,10 @@
         </div>
 
     </div>
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+
+    <!-- Modal Listar Produtos -->
+    <div class="modal fade" id="modalListarProdutos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -279,8 +294,36 @@
                     ...
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="inserirProdutos()">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Listar Produto - pelo Codigo de barras -->
+    <div class="modal fade" id="modalListarProduto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Produto Buscado</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <form class="container" method="POST" action="" name="produtos" id="formProdutoListado">                
+                <div class="form-group">
+                    <label for="codBarra"> Digite o Código de Barra:</label>
+                    <input id="codBarra" type="number" class="form-control" name="codBarra" required />
+                </div>
+                <hr>
+            </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="button" class="btn btn-primary" onclick="listarProduto()"> Buscar</button>
                 </div>
             </div>
         </div>
