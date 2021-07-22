@@ -19,7 +19,7 @@
     $ativo = (isset($_GET["ativo"])?$_GET["ativo"]:false);  
 
       
-    $resultado = $strcon->query("INSERT INTO `estoque`(`codigoBarras`, `nomeProduto`, `fabricante`, `precoVenda`, `quantidade`, `peso`, `descricao`, `link`, `data`, `ativo`) VALUES" . "($codBarra,'$nomeProduto','$fabricante',$precoVenda,$quantAdquirida, $peso, '$descricao','$imagem',$dia,$ativo)");           
+    $resultado = $strcon->query("INSERT INTO `estoque`(`codigoBarras`, `nomeProduto`, `fabricante`, `precoVenda`, `quantidade`, `peso`, `descricao`, `link`, `data`, `ativo`) VALUES" . "($codBarra,'$nomeProduto','$fabricante',$precoVenda,$quantAdquirida, $peso, '$descricao','$imagem','$dia',$ativo)");           
         
     
     $strcon->close(); 
