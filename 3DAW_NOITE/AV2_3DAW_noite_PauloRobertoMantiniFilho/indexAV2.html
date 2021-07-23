@@ -10,16 +10,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AV2 - Paulo Roberto Mantini Filho</title>
-    <style>
-        #esquerda {
-            position: relative;
-            border-width: 2px;
-            width: 900px;
-            height: 150px;
-            left: 0px;
-            float: left;
-        }
-    </style>
+   
 </head>
 
 <body>
@@ -34,15 +25,15 @@
         <hr class="row">
         <div class="row">
             <div>
-                <form class="" method="POST" action="" name="produtos" id="formProdutoListado">
+                <form class="" method="POST" action="" name="produtos" id="buscarProduto">
                     <div class="form-group">
-                        <label for="codBarra">Digite o Código de Barra</label>
+                        <label for="codBarraPesquisa">Digite o Código de Barra</label>
                         <div class="d-flex">
-                            <input id="codBarra" type="number" placeholder="Pesquisar" class="form-control"
-                                name="codBarra" required />                            
+                            <input id="codBarraPesquisa" type="number" placeholder="Pesquisar" class="form-control"
+                                name="codBarraPesquisa" required />                            
                             <div>
                                 <button type="button" class="btn btn-outline-primary"
-                                    onclick="listarProduto()">Buscar</button>
+                                    onclick="buscarProduto()">Buscar</button>
                             </div>
                         </div>
                     </div>
@@ -63,21 +54,9 @@
 
         </div>
         <div class="row">
-            <table class="table">
+            <table id="tabelaProdutos" class="table">
                 <thead>
                     <tr>
-                        <!-- // ativo: "1"
-                   
-                    // data: "0000-00-00"
-                    // descricao: "ver"
-                    
-                    // id: "10"
-                    // link: "link"
-                    
-                    // peso: "10"
-                    // precoVenda: "10"
-                    -->
-
                         <th scope="col">Codigo de Barras</th>
                         <th scope="col">Nome do Produto</th>
                         <th scope="col">Categoria</th>
@@ -86,24 +65,7 @@
                         <th scope="col">Opções</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>123456789</td>
-                        <td>OVO</td>
-                        <td>PERECIVEL</td>
-                        <td>R$ 10,00</td>
-                        <td>1000 und. </td>
-                        <td>
-                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal"
-                                data-bs-target="#modalinserirProdutos">Info</button>
-                            <!-- Button do Modal Editar Produto -->
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#modalinserirProdutos" onclick="editarProduto(10)">
-                                Editar
-                            </button>
-                            <button type="button" class="btn btn-outline-danger">Danger</button>
-                        </td>
-                    </tr>
+                <tbody>                  
                 </tbody>
             </table>
         </div>
@@ -190,9 +152,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label id="ativo">Ativo:</label>
+                            <label for="ativo">Ativo:</label>
                             <select id="ativo" type="text" class="form-control" name="ativo" required>
-                                <option value="">Selecione</option>
+                                <option value="0">Selecione</option>
                                 <option value="true">SIM</option>
                                 <option value="false">NÂO</option>
                             </select>
@@ -253,9 +215,6 @@
     </div>
 
 
-
-
-
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
@@ -267,6 +226,10 @@
     integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous">
 </script>
 <script>
+    var produtos = []
+    $(document).ready(function(){
+        listarEstoque();
+    })
     function inserirProdutos() {
         let objProduto = document.getElementById("formProduto")
         let msg = validarProduto(objProduto);
@@ -276,7 +239,8 @@
                 if (this.readyState == 4 && this.status == 200) {
                     if (this.responseText) {
                         alert("Salvo com Sucesso");
-                        limparCampos();
+                        limparCampos()                       
+                        listarEstoque()
                     } else {
                         alert("Erro ao Inserir Produto")
                     }
@@ -301,38 +265,71 @@
     }
 
     function listarEstoque() {
-
+        let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    produtos = JSON.parse(this.responseText);                    
+                    produtos = produtos.map(function(e){                           
+                        return {
+                            id:e["0"],
+                            codigoBarras:e['1'],
+                            nomeProduto:e['2'],
+                            fabricante:e['3'],
+                            precoVenda:e['4'],
+                            quantidade:e['5'],
+                            peso:e['6'],
+                            descricao:e['7'],
+                            link:e['8'],
+                            data:e['9'],
+                            ativo:e['10']
+                        }
+                    })
+                    preencherProdutos()
+                }
+            }            
+            xmlHttp.open("GET",
+                "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/obterProdutos.php", true);
+            xmlHttp.send();
     }
 
-    function listarProduto() {
-        let objListarProduto = document.getElementById("formProdutoListado")
-        let msg = validarListarProduto(objListarProduto);
+    function addLinhaTabela(produto){
+        
+        var newRow = $("<tr>");
+        var cols = "";    
+        cols += '<td>'+produto.codigoBarras+'</td>';
+        cols += '<td>'+produto.nomeProduto+'</td>';
+        cols += '<td>'+produto.categoria+'</td>';
+        cols += '<td>'+produto.precoVenda+'</td>';
+        cols += '<td>'+produto.quantidade+'</td>';
+        cols += '<td>';
+        cols += '<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalinserirProdutos">Detalhar</button> <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalinserirProdutos" onclick="editarProduto('+produto.id+')">Editar</button> <button type="button" class="btn btn-outline-danger">Excluir</button>';
+        cols += '</td>';    
+        
+        newRow.append(cols);
+        $("#tabelaProdutos").append(newRow);
+    }
+    
+    function buscarProduto() {
+        let objbuscarProduto = document.getElementById("buscarProduto")
+        let msg = validarListarProduto(objbuscarProduto);
         if (msg == true) {
             let xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
+                    var produto = JSON.parse(this.responseText);
+                    if(produto != null){
+                        preencherProduto(produto);
+                        $("#modalinserirProdutos").modal();
+                    }
+                    else{
+                        alert("Produto não encontrado"); 
+                    }                    
 
-                    var busca = JSON.parse(this.responseText);
-                    // ativo: "1"
-                    // codigoBarras: "1234"
-                    // data: "0000-00-00"
-                    // descricao: "ver"
-                    // fabricante: "novo"
-                    // id: "10"
-                    // link: "link"
-                    // nomeProduto: "ovo"
-                    // peso: "10"
-                    // precoVenda: "10"
-                    // quantidade: "10"
-                    console.log(busca);
                 }
-            }
-            console.log({
-                objListarProduto
-            });
+            }            
             xmlHttp.open("GET",
-                "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/lerProduto.php?codBarra=" +
-                objListarProduto.codBarra.value, true);
+                "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/obterProduto.php?codBarra=" +
+                objbuscarProduto.codBarraPesquisa.value, true);
             xmlHttp.send();
             console.log("requisição enviada");
         }
@@ -349,7 +346,7 @@
         document.getElementById("descricao").value = ""
         document.getElementById("imagem").value = ""
         document.getElementById("dia").value = ""
-        document.getElementById("ativo").value = ""
+        document.getElementById("ativo").value = "0"
     }
 
     function validarProduto(formProduto) {
@@ -400,12 +397,36 @@
 
     function validarListarProduto(listarProduto) {
 
-        if (listarProduto.codBarra.value == "") {
+        if (listarProduto.codBarraPesquisa.value == "") {
             alert("Informar o codigo de barras do produto");
             return false;
         }
         return true;
     }
-</script>
 
+    function preencherProdutos(){
+        $("#tabelaProdutos > tbody").empty();
+        produtos.map(function(e) {
+            addLinhaTabela(e);
+        })
+    }
+
+    function preencherProduto(produto){
+        console.log(produto)
+        $("#codBarra").val(produto.codigoBarras)
+        $("#nomeProduto").val(produto.nomeProduto)
+        $("#fabricante").val(produto.fabricante)
+        //$("#categoria").val(produto.categoria)
+        //$("#tipoProduto").val(produto.tipoProduto)
+        $("#precoVenda").val(produto.precoVenda)
+        $("#quantAdquirida").val(produto.quantidade)
+        $("#peso").val(produto.peso)
+        $("#descricao").val(produto.descricao)
+        $("#imagem").val(produto.link)
+        $("#dia").val(produto.data)
+        $("#ativo").val(produto.ativo != "0"?"true":"false") 
+
+    }
+</script>
+ //filter
 </html>

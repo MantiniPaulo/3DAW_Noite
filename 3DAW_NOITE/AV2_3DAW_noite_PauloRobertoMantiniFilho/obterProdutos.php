@@ -10,7 +10,7 @@
     
     $resultado = $strcon->query($query);
       
-    $result  =  $resultado->fetch_array();
+    $result  =  $resultado->fetch_all();
     echo json_encode($result);
     
     $strcon->close(); 
