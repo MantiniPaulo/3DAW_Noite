@@ -78,7 +78,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Inserir Produtos</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -105,17 +105,17 @@
                             <label for="categoria">Categoria:</label>
                             <select id="categoria" type="text" class="form-control" name="categoria" required>
                                 <option value="0">Selecione</option>
-                                <option value="0"></option>
-                                <option value="0"></option>
+                                <option value="1">Novo</option>
+                                <option value="2">Usado</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="tipoProduto">Tipo de produto:</label>
                             <select id="tipoProduto" type="text" class="form-control" name="tipoProduto" required>
-                                <option value="">Selecione</option>
-                                <option value="">Tipo2</option>
-                                <option value=""></option>
+                                <option value="0">Selecione</option>
+                                <option value="1">Perecível</option>
+                                <option value="2">Não Perecível</option>
                             </select>
                         </div>
 
@@ -193,26 +193,99 @@
     </div>
 
     <!-- Modal Listar Produto - pelo Codigo de barras -->
-    <div class="modal fade" id="modalListarProduto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+    <div class="modal fade" id="modalDetalharProduto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Obter Produto</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Busca</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
 
+                <div class="modal-body">
+                    <form class="container" method="POST" action="" name="produtos" id="formProduto">
+                        <div class="form-group">
+                            <label for="codBarra">Código de Barra:</label>
+                            <input id="codBarra" type="number" class="form-control" name="codBarra" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nomeProduto">Nome do produto:</label>
+                            <input id="nomeProduto" type="text" class="form-control" name="nomeProduto" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fabricante">Fabricante:</label>
+                            <input id="fabricante" type="text" class="form-control" name="fabricante" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categoria">Categoria:</label>
+                            <select id="categoria" type="text" class="form-control" name="categoria" required>
+                                <option value="0">Selecione</option>
+                                <option value="1">Novo</option>
+                                <option value="2">Usado</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tipoProduto">Tipo de produto:</label>
+                            <select id="tipoProduto" type="text" class="form-control" name="tipoProduto" required>
+                                <option value="0">Selecione</option>
+                                <option value="1">Perecível</option>
+                                <option value="2">Não Perecível</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="precoVenda">Preço de Venda:</label>
+                            <input id="precoVenda" type="number" class="form-control" name="precoVenda" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantAdquirida">Quantidade Adquirida</label>
+                            <input id="quantAdquirida" type="number" class="form-control" name="quantAdquirida"
+                                required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="peso">Peso:</label>
+                            <input id="peso" type="number" class="form-control" name="peso" required />
+                            <small id="pesoKg" class="form-text text-muted">Inserir peso em gramas</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descricao">Descrição:</label>
+                            <input id="descricao" type="text" class="form-control" name="descricao" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imagem">Link Imagem:</label>
+                            <input id="imagem" type="text" class="form-control" name="imagem" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dia">Data da inclusão:</label>
+                            <input id="dia" type="date" class="form-control" name="dia" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ativo">Ativo:</label>
+                            <select id="ativo" type="text" class="form-control" name="ativo" required>
+                                <option value="0">Selecione</option>
+                                <option value="true">SIM</option>
+                                <option value="false">NÂO</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>                    
                 </div>
             </div>
         </div>
-    </div>
 
 
 </body>
@@ -302,7 +375,7 @@
         cols += '<td>'+produto.precoVenda+'</td>';
         cols += '<td>'+produto.quantidade+'</td>';
         cols += '<td>';
-        cols += '<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalinserirProdutos">Detalhar</button> <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalinserirProdutos" onclick="editarProduto('+produto.id+')">Editar</button> <button type="button" class="btn btn-outline-danger">Excluir</button>';
+        cols += '<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalDetalharProduto onclick="detalharProduto('+produto.id+')">Detalhar</button> <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalinserirProdutos" onclick="editarProduto('+produto.id+')">Editar</button> <button type="button" class="btn btn-outline-danger">Excluir</button>';
         cols += '</td>';    
         
         newRow.append(cols);
@@ -320,11 +393,12 @@
                     if(produto != null){
                         preencherProduto(produto);
                         $("#modalinserirProdutos").modal();
+                        
                     }
                     else{
                         alert("Produto não encontrado"); 
                     }                    
-
+                    
                 }
             }            
             xmlHttp.open("GET",
@@ -425,6 +499,33 @@
         $("#imagem").val(produto.link)
         $("#dia").val(produto.data)
         $("#ativo").val(produto.ativo != "0"?"true":"false") 
+
+    }
+
+    function detalharProduto(produto) {
+        let objdetalharProduto = document.getElementById("detalharProduto")
+        let msg = validarListarProduto(objdetalharProduto);
+        if (msg == true) {
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) { 
+                    var produto = JSON.parse(this.responseText);
+                    if(produto != null){
+                        preencherProduto(produto);
+                        $("#modalDetalharProduto").modal();
+                    }
+                    else{
+                        alert("Produto não encontrado"); 
+                    }                    
+
+                }
+            }            
+            xmlHttp.open("GET",
+                "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/detalharProduto.php?codBarra=" +
+                objdetalharProduto.codBarraPesquisa.value, true);
+            xmlHttp.send();
+            console.log("requisição enviada");
+        }
 
     }
 </script>
