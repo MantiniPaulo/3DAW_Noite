@@ -241,7 +241,7 @@
                 objProduto.ativo.value + "&categoria=" + objProduto.categoria.value + "&tipoProduto=" +
                 objProduto.tipoProduto.value, true);
             xmlHttp.send();
-            console.log("requisição enviada");
+            
         }
     }
 
@@ -317,7 +317,7 @@
                 "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/obterProduto.php?codBarra=" +
                 objbuscarProduto.codBarraPesquisa.value, true);
             xmlHttp.send();
-            console.log("requisição enviada");
+            
         }
 
     }
@@ -400,7 +400,7 @@
     }
 
     function preencherProduto(produto){
-        console.log(produto)
+        
         $("#codBarra").val(produto.codigoBarras)
         $("#nomeProduto").val(produto.nomeProduto)
         $("#fabricante").val(produto.fabricante)
@@ -437,7 +437,7 @@
             xmlHttp.open("GET",
                 "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/detalharProduto.php?id=" + id, true);
             xmlHttp.send();
-            console.log("requisição enviada");
+            
         
 
     }
@@ -523,7 +523,7 @@
                 objProduto.ativo.value + "&categoria=" + objProduto.categoria.value + "&tipoProduto=" +
                 objProduto.tipoProduto.value, true);
             xmlHttp.send();
-            console.log("requisição enviada");
+           
         }
 
     }
@@ -552,7 +552,7 @@
             xmlHttp.open("GET",
                 "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/buscarProduto2.php?id=" + id , true);
             xmlHttp.send();
-            console.log("requisição enviada");
+           
         }
     
 </script>
