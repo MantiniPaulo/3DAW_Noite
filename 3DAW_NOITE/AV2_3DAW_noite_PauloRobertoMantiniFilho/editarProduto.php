@@ -6,7 +6,7 @@
     $nomeBanco = "produtosestoque";
     $strcon = new mysqli($servidor, $usuario, $senha, $nomeBanco) or die('Erro ao conectar ao banco de dados');    
 
-    
+    $id = (isset($_GET["id"])?$_GET["id"]:false);
     $codBarra = (isset($_GET["codBarra"])?$_GET["codBarra"]:false);
     $nomeProduto = (isset($_GET["nomeProduto"])?$_GET["nomeProduto"]:false);
     $fabricante = (isset($_GET["fabricante"])?$_GET["fabricante"]:false);
@@ -21,8 +21,7 @@
     $tipoProduto = (isset($_GET["tipoProduto"])?$_GET["tipoProduto"]:false);  
 
       
-    $resultado = $strcon->query("INSERT INTO `estoque`(`codigoBarras`, `nomeProduto`, `fabricante`, `precoVenda`, `quantidade`, `peso`, `descricao`, `link`, `data`, `ativo`, `categoria`, `tipoProduto`) VALUES" . "($codBarra,'$nomeProduto','$fabricante',$precoVenda,$quantAdquirida, $peso, '$descricao','$imagem','$dia',$ativo,$categoria,$tipoProduto)");           
-        
+    $resultado = $strcon->query("UPDATE `estoque` SET `codigoBarras`=$codBarra,`nomeProduto`='$nomeProduto',`fabricante`='$fabricante',`precoVenda`= $precoVenda,`quantidade`= $quantAdquirida,`peso`= $peso,`descricao`='$descricao',`link`='$imagem',`data`='$dia',`ativo`=$ativo,`categoria`=$categoria,`tipoProduto`=$tipoProduto WHERE id = $id");        
     
     $strcon->close(); 
     echo json_encode($resultado);

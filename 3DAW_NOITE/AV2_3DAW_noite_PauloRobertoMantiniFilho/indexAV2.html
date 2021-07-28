@@ -46,7 +46,7 @@
             <div>
                 <div class="form-group">
                     <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                        data-target="#modalinserirProdutos">
+                        data-target="#modalinserirProdutos" onclick="btnInserirProduto()">
                         Inserir Produtos
                     </button>
                 </div>
@@ -162,124 +162,33 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="button" id="btnProduto" name="op" class="btn btn-outline-primary"
-                        value="InserirProduto" onclick="inserirProdutos()">Inserir Produto</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Listar Produtos -->
-    <div class="modal fade" id="modalListarProdutos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Listar Produtos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
+                    value="InserirProduto" onclick="inserirProdutos()">Inserir Produto</button>
+                    <button type="button" id="btnSalvar" name="op" class="btn btn-outline-primary"
+                    value="InserirProduto" style="display: none;">Salvar </button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                    <button type="button" class="btn btn-primary" onclick="inserirProdutos()">Salvar Alterações</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal Listar Produto - pelo Codigo de barras -->
+    
+
+    <!-- Modal EXIBIR -->
     <div class="modal fade" id="modalDetalharProduto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Busca</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Detalhe do Produto</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
                 <div class="modal-body">
-                    <form class="container" method="POST" action="" name="produtos" id="formProduto">
-                        <div class="form-group">
-                            <label for="codBarra">Código de Barra:</label>
-                            <input id="codBarra" type="number" class="form-control" name="codBarra" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nomeProduto">Nome do produto:</label>
-                            <input id="nomeProduto" type="text" class="form-control" name="nomeProduto" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fabricante">Fabricante:</label>
-                            <input id="fabricante" type="text" class="form-control" name="fabricante" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="categoria">Categoria:</label>
-                            <select id="categoria" type="text" class="form-control" name="categoria" required>
-                                <option value="0">Selecione</option>
-                                <option value="1">Novo</option>
-                                <option value="2">Usado</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tipoProduto">Tipo de produto:</label>
-                            <select id="tipoProduto" type="text" class="form-control" name="tipoProduto" required>
-                                <option value="0">Selecione</option>
-                                <option value="1">Perecível</option>
-                                <option value="2">Não Perecível</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="precoVenda">Preço de Venda:</label>
-                            <input id="precoVenda" type="number" class="form-control" name="precoVenda" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="quantAdquirida">Quantidade Adquirida</label>
-                            <input id="quantAdquirida" type="number" class="form-control" name="quantAdquirida"
-                                required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="peso">Peso:</label>
-                            <input id="peso" type="number" class="form-control" name="peso" required />
-                            <small id="pesoKg" class="form-text text-muted">Inserir peso em gramas</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="descricao">Descrição:</label>
-                            <input id="descricao" type="text" class="form-control" name="descricao" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="imagem">Link Imagem:</label>
-                            <input id="imagem" type="text" class="form-control" name="imagem" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="dia">Data da inclusão:</label>
-                            <input id="dia" type="date" class="form-control" name="dia" required />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ativo">Ativo:</label>
-                            <select id="ativo" type="text" class="form-control" name="ativo" required>
-                                <option value="0">Selecione</option>
-                                <option value="true">SIM</option>
-                                <option value="false">NÂO</option>
-                            </select>
-                        </div>
-                    </form>
+                    <dl id="detalheDeProduto">
+                        
+                    </dl>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>                    
@@ -300,10 +209,11 @@
 </script>
 <script>
     var produtos = []
+    var Id = 0
     $(document).ready(function(){
         listarEstoque();
     })
-    function inserirProdutos() {
+    function inserirProdutos() {        
         let objProduto = document.getElementById("formProduto")
         let msg = validarProduto(objProduto);
         if (msg == true) {
@@ -313,15 +223,12 @@
                     if (this.responseText) {
                         alert("Salvo com Sucesso");
                         limparCampos()                       
-                        listarEstoque()
+                        listarEstoque()                        
                     } else {
                         alert("Erro ao Inserir Produto")
                     }
                 }
-            }
-            console.log({
-                objProduto
-            });
+            }            
             xmlHttp.open("GET",
                 "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/criarProduto.php?codBarra=" +
                 objProduto.codBarra.value + "&nomeProduto=" + objProduto.nomeProduto.value + "&fabricante=" +
@@ -331,7 +238,8 @@
                 .quantAdquirida.value + "&peso=" + objProduto.peso.value + "&descricao=" + objProduto
                 .descricao.value +
                 "&imagem=" + objProduto.imagem.value + "&dia=" + objProduto.dia.value + "&ativo=" +
-                objProduto.ativo.value, true);
+                objProduto.ativo.value + "&categoria=" + objProduto.categoria.value + "&tipoProduto=" +
+                objProduto.tipoProduto.value, true);
             xmlHttp.send();
             console.log("requisição enviada");
         }
@@ -354,7 +262,9 @@
                             descricao:e['7'],
                             link:e['8'],
                             data:e['9'],
-                            ativo:e['10']
+                            ativo:e['10'],
+                            categoria:e['11'],
+                            tipoProduto:e['12']
                         }
                     })
                     preencherProdutos()
@@ -375,7 +285,7 @@
         cols += '<td>'+produto.precoVenda+'</td>';
         cols += '<td>'+produto.quantidade+'</td>';
         cols += '<td>';
-        cols += '<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalDetalharProduto onclick="detalharProduto('+produto.id+')">Detalhar</button> <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalinserirProdutos" onclick="editarProduto('+produto.id+')">Editar</button> <button type="button" class="btn btn-outline-danger">Excluir</button>';
+        cols += '<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#modalDetalharProduto" onclick="detalharProduto('+produto.id+')">Detalhar</button> <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalinserirProdutos" onclick="editarProduto('+produto.id+')">Editar</button> <button type="button" class="btn btn-outline-danger">Excluir</button>';
         cols += '</td>';    
         
         newRow.append(cols);
@@ -392,6 +302,8 @@
                     var produto = JSON.parse(this.responseText);
                     if(produto != null){
                         preencherProduto(produto);
+                        document.getElementById("exampleModalLabel").textContent = "Busca"
+                        document.getElementById("btnProduto").style.display = "none"
                         $("#modalinserirProdutos").modal();
                         
                     }
@@ -421,6 +333,8 @@
         document.getElementById("imagem").value = ""
         document.getElementById("dia").value = ""
         document.getElementById("ativo").value = "0"
+        document.getElementById("categoria").value = "0"
+        document.getElementById("tipoProduto").value = "0"
     }
 
     function validarProduto(formProduto) {
@@ -490,8 +404,8 @@
         $("#codBarra").val(produto.codigoBarras)
         $("#nomeProduto").val(produto.nomeProduto)
         $("#fabricante").val(produto.fabricante)
-        //$("#categoria").val(produto.categoria)
-        //$("#tipoProduto").val(produto.tipoProduto)
+        $("#categoria").val(produto.categoria)
+        $("#tipoProduto").val(produto.tipoProduto)
         $("#precoVenda").val(produto.precoVenda)
         $("#quantAdquirida").val(produto.quantidade)
         $("#peso").val(produto.peso)
@@ -502,17 +416,17 @@
 
     }
 
-    function detalharProduto(produto) {
-        let objdetalharProduto = document.getElementById("detalharProduto")
-        let msg = validarListarProduto(objdetalharProduto);
-        if (msg == true) {
-            let xmlHttp = new XMLHttpRequest();
+    function detalharProduto(id) {
+        
+        let xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) { 
                     var produto = JSON.parse(this.responseText);
-                    if(produto != null){
-                        preencherProduto(produto);
-                        $("#modalDetalharProduto").modal();
+                    if(produto != null){   
+                        $("#detalheDeProduto").empty();                     
+                        detalheDeProduto(produto);                        
+                        $("#modalDetalharProduto").modal();  
+                        
                     }
                     else{
                         alert("Produto não encontrado"); 
@@ -521,13 +435,126 @@
                 }
             }            
             xmlHttp.open("GET",
-                "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/detalharProduto.php?codBarra=" +
-                objdetalharProduto.codBarraPesquisa.value, true);
+                "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/detalharProduto.php?id=" + id, true);
+            xmlHttp.send();
+            console.log("requisição enviada");
+        
+
+    }
+
+    function btnInserirProduto(){
+        document.getElementById("exampleModalLabel").textContent = "Inserir Produto";
+        limparCampos();
+        document.getElementById("btnProduto").style.display = "initial";
+    }
+
+    function detalheDeProduto(produto){       
+               
+        var newRow = $("<dl>");
+        var cols = "";    
+        cols += '<dt>Codigo de Barras:</dt>';
+        cols += '<dd>'+produto.codigoBarras+'</dd>';
+
+        cols += '<dt>Nome do Produto:</dt>';
+        cols += '<dd>'+produto.nomeProduto+'</dd>';
+
+        cols += '<dt>Codigo de Barras:</dt>';
+        cols += '<dd>'+produto.codigoBarras+'</dd>';
+
+        cols += '<dt>Categoria:</dt>';
+        cols += '<dd>'+produto.categoria+'</dd>';
+
+        cols += '<dt>Preço de Venda:</dt>';
+        cols += '<dd>'+produto.tipoProduto+'</dd>';
+
+        cols += '<dt>Preço de Venda:</dt>';
+        cols += '<dd>'+produto.precoVenda+'</dd>';
+
+        cols += '<dt>Quantidade:</dt>';
+        cols += '<dd>'+produto.quantidade+'</dd>';
+
+        cols += '<dt>Peso:</dt>';
+        cols += '<dd>'+produto.peso+'</dd>';
+
+        cols += '<dt>Descrição:</dt>';
+        cols += '<dd>'+produto.descricao+'</dd>';
+
+        cols += '<dt>Link da imagem:</dt>';
+        cols += '<dd>'+produto.link+'</dd>';
+
+        cols += '<dt>Data de Inclusão :</dt>';
+        cols += '<dd>'+produto.data+'</dd>';
+
+        cols += '<dt>Ativo: :</dt>';
+        cols += '<dd>'+produto.ativo+'</dd>';      
+           
+        
+        newRow.append(cols);
+        $("#detalheDeProduto").append(newRow);
+    }
+
+    function salvarProduto(){
+        let objProduto = document.getElementById("formProduto")
+        let msg = validarProduto(objProduto);
+        if (msg == true) {
+            let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var produto = JSON.parse(this.responseText);
+                    if(produto){               
+                        alert("Editado com Sucesso");
+                        listarEstoque();                                              
+                    }
+                    else{
+                        alert("Não pode ser editado"); 
+                    }                    
+                    
+                }
+            }            
+            xmlHttp.open("GET",
+                "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/editarProduto.php?id=" + Id + "&codBarra=" +
+                objProduto.codBarra.value + "&nomeProduto=" + objProduto.nomeProduto.value + "&fabricante=" +
+                objProduto.fabricante.value + "&precoVenda=" + objProduto.precoVenda.value +
+                "&quantAdquirida=" +
+                objProduto
+                .quantAdquirida.value + "&peso=" + objProduto.peso.value + "&descricao=" + objProduto
+                .descricao.value +
+                "&imagem=" + objProduto.imagem.value + "&dia=" + objProduto.dia.value + "&ativo=" +
+                objProduto.ativo.value + "&categoria=" + objProduto.categoria.value + "&tipoProduto=" +
+                objProduto.tipoProduto.value, true);
             xmlHttp.send();
             console.log("requisição enviada");
         }
 
     }
+    
+    function editarProduto(id){
+        let objbuscarProduto = document.getElementById("formProduto")
+        let xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var produto = JSON.parse(this.responseText);
+                    if(produto != null){
+                        preencherProduto(produto);
+                        document.getElementById("exampleModalLabel").textContent = "Editar"
+                        document.getElementById("btnProduto").style.display = "initial"
+                        document.getElementById("btnSalvar").style.display = "initial"
+                        $("#modalinserirProdutos").modal();
+                        document.getElementById("btnSalvar").onclick = salvarProduto;
+                        Id = id;
+                    }
+                    else{
+                        alert("Produto não encontrado"); 
+                    }                    
+                    
+                }
+            }            
+            xmlHttp.open("GET",
+                "http://localhost/3daw/3daw_noite/AV2_3DAW_noite_PauloRobertoMantiniFilho/buscarProduto2.php?id=" + id , true);
+            xmlHttp.send();
+            console.log("requisição enviada");
+        }
+    
 </script>
  //filter
 </html>
