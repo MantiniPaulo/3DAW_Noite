@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "java",
+            "name": "Launch imperial",
+            "request": "launch",
+            "mainClass": "imperial",
+            "projectName": "FACUL_c5c079fa"
+        },
+        {
             "name": "(Windows) Iniciar",
             "type": "cppvsdbg",
             "request": "launch",
